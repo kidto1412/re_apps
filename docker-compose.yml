@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  pos-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: kasera_pos_backend
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - pos_data:/app/pos_database.db
+    environment:
+      - PYTHONUNBUFFERED=1
+
+volumes:
+  pos_data:
+    driver: local

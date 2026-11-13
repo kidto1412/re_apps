@@ -1,0 +1,100 @@
+
+--- AndroidManifest.xml (Decoded) ---
+<manifest versionCode="2" versionName="1.0.1" compileSdkVersion="36" compileSdkVersionCodename="16" package="com.kasircuy.app" platformBuildVersionCode="36" platformBuildVersionName="16">
+  <uses-sdk minSdkVersion="23" targetSdkVersion="34">
+  </uses-sdk>
+  <uses-permission name="android.permission.CAMERA">
+  </uses-permission>
+  <uses-permission name="android.permission.INTERNET">
+  </uses-permission>
+  <uses-permission name="android.permission.READ_CONTACTS">
+  </uses-permission>
+  <queries>
+    <intent>
+      <action name="android.intent.action.PROCESS_TEXT">
+      </action>
+      <data mimeType="text/plain">
+      </data>
+    </intent>
+  </queries>
+  <uses-feature name="android.hardware.camera" required="0">
+  </uses-feature>
+  <permission name="com.kasircuy.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" protectionLevel="2">
+  </permission>
+  <uses-permission name="com.kasircuy.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION">
+  </uses-permission>
+  <uses-permission name="android.permission.ACCESS_NETWORK_STATE">
+  </uses-permission>
+  <application label="Kasircuy" icon="2131361792" name="android.app.Application" extractNativeLibs="0" usesCleartextTraffic="4294967295" appComponentFactory="androidx.core.app.CoreComponentFactory">
+    <activity theme="2131492864" name="com.kasircuy.app.MainActivity" exported="4294967295" taskAffinity="" launchMode="1" configChanges="1073758132" windowSoftInputMode="16" hardwareAccelerated="4294967295">
+      <meta-data name="io.flutter.embedding.android.NormalTheme" resource="2131492865">
+      </meta-data>
+      <intent-filter>
+        <action name="android.intent.action.MAIN">
+        </action>
+        <category name="android.intent.category.LAUNCHER">
+        </category>
+      </intent-filter>
+    </activity>
+    <meta-data name="flutterEmbedding" value="2">
+    </meta-data>
+    <provider name="net.nfet.flutter.printing.PrintFileProvider" exported="0" authorities="com.kasircuy.app.flutter.printing" grantUriPermissions="4294967295">
+      <meta-data name="android.support.FILE_PROVIDER_PATHS" resource="2131623936">
+      </meta-data>
+    </provider>
+    <service name="androidx.camera.core.impl.MetadataHolderService" enabled="0" exported="0">
+      <meta-data name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER" value="androidx.camera.camera2.Camera2Config$DefaultProvider">
+      </meta-data>
+    </service>
+    <service name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService" exported="0" directBootAware="4294967295">
+      <meta-data name="com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar" value="com.google.firebase.components.ComponentRegistrar">
+      </meta-data>
+      <meta-data name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar" value="com.google.firebase.components.ComponentRegistrar">
+      </meta-data>
+      <meta-data name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar" value="com.google.firebase.components.ComponentRegistrar">
+      </meta-data>
+    </service>
+    <provider name="com.google.mlkit.common.internal.MlKitInitProvider" exported="0" authorities="com.kasircuy.app.mlkitinitprovider" initOrder="99">
+    </provider>
+    <activity theme="16973840" name="com.google.android.gms.common.api.GoogleApiActivity" exported="0">
+    </activity>
+    <meta-data name="com.google.android.gms.version" value="2131230720">
+    </meta-data>
+    <uses-library name="androidx.window.extensions" required="0">
+    </uses-library>
+    <uses-library name="androidx.window.sidecar" required="0">
+    </uses-library>
+    <provider name="androidx.startup.InitializationProvider" exported="0" authorities="com.kasircuy.app.androidx-startup">
+      <meta-data name="androidx.lifecycle.ProcessLifecycleInitializer" value="androidx.startup">
+      </meta-data>
+      <meta-data name="androidx.profileinstaller.ProfileInstallerInitializer" value="androidx.startup">
+      </meta-data>
+    </provider>
+    <receiver name="androidx.profileinstaller.ProfileInstallReceiver" permission="android.permission.DUMP" enabled="4294967295" exported="4294967295" directBootAware="0">
+      <intent-filter>
+        <action name="androidx.profileinstaller.action.INSTALL_PROFILE">
+        </action>
+      </intent-filter>
+      <intent-filter>
+        <action name="androidx.profileinstaller.action.SKIP_FILE">
+        </action>
+      </intent-filter>
+      <intent-filter>
+        <action name="androidx.profileinstaller.action.SAVE_PROFILE">
+        </action>
+      </intent-filter>
+      <intent-filter>
+        <action name="androidx.profileinstaller.action.BENCHMARK_OPERATION">
+        </action>
+      </intent-filter>
+    </receiver>
+    <service name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery" exported="0">
+      <meta-data name="backend:com.google.android.datatransport.cct.CctBackendFactory" value="cct">
+      </meta-data>
+    </service>
+    <service name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" permission="android.permission.BIND_JOB_SERVICE" exported="0">
+    </service>
+    <receiver name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver" exported="0">
+    </receiver>
+  </application>
+</manifest>

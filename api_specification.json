@@ -1,0 +1,499 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Mobile POS API Specification",
+    "version": "1.0.0",
+    "description": "Reconstructed API contract and data schemas."
+  },
+  "servers": [
+    {
+      "url": "http://43.157.205.66:5000",
+      "description": "Application Backend Server"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "StandardResponse": {
+        "type": "object",
+        "properties": {
+          "status": { "type": "boolean" },
+          "message": { "type": "string" },
+          "data": { "type": "object" },
+          "token": { "type": "string" }
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["username", "password"],
+        "properties": {
+          "username": { "type": "string" },
+          "password": { "type": "string" }
+        }
+      },
+      "TransactionItem": {
+        "type": "object",
+        "properties": {
+          "productId": { "type": "integer" },
+          "productName": { "type": "string" },
+          "quantity": { "type": "integer" },
+          "price": { "type": "number" },
+          "subtotal": { "type": "number" }
+        }
+      },
+      "CreateTransactionRequest": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/TransactionItem" }
+          },
+          "subtotal": { "type": "number" },
+          "tax": { "type": "number" },
+          "discount_id": { "type": "integer", "nullable": true },
+          "additional_fee_id": { "type": "integer", "nullable": true },
+          "payment_method": { "type": "string", "example": "CASH" },
+          "cash_amount": { "type": "number" },
+          "change_amount": { "type": "number" }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "Owner Login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Authentication",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StandardResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/staff/login": {
+      "post": {
+        "summary": "Staff Login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/LoginRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Authentication",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StandardResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/change-password": {
+      "post": {
+        "summary": "Change User Password",
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["old_password", "new_password"],
+                "properties": {
+                  "old_password": { "type": "string" },
+                  "new_password": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Password successfully changed"
+          }
+        }
+      }
+    },
+    "/transactions": {
+      "get": {
+        "summary": "List Transactions",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Transaction List",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StandardResponse" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create Transaction",
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateTransactionRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transaction Created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/StandardResponse" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/product": {
+      "get": {
+        "summary": "List Products",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Product List"
+          }
+        }
+      }
+    },
+    "/category": {
+      "get": {
+        "summary": "List Categories",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Category List"
+          }
+        }
+      }
+    },
+    "/stock-opname": {
+      "get": {
+        "summary": "List Stock Opname Records",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Stock Opname List"
+          }
+        }
+      },
+      "post": {
+        "summary": "Record Stock Opname Physical Count",
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["product_id", "physical_count"],
+                "properties": {
+                  "product_id": { "type": "integer" },
+                  "physical_count": { "type": "integer" },
+                  "notes": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Stock Adjustment Recorded"
+          }
+        }
+      }
+    },
+    "/stock-movements/history": {
+      "get": {
+        "summary": "Retrieve Unified Stock Audit Movements",
+        "security": [{ "BearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "product_id",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "integer" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movement List (SALE, RESTOCK, OPNAME_ADJUST)"
+          }
+        }
+      }
+    },
+    "/discount": {
+      "get": {
+        "summary": "List Active Discounts",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Discount List"
+          }
+        }
+      }
+    },
+    "/additional-fee": {
+      "get": {
+        "summary": "List Additional Fees and Surcharges",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Fee List"
+          }
+        }
+      }
+    },
+    "/customer": {
+      "get": {
+        "summary": "List Registered Customers",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Customer List"
+          }
+        }
+      },
+      "post": {
+        "summary": "Register New Customer",
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "phone": { "type": "string" },
+                  "email": { "type": "string" },
+                  "address": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Customer Registered"
+          }
+        }
+      }
+    },
+    "/employee": {
+      "get": {
+        "summary": "List Store Employees",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Employee List"
+          }
+        }
+      },
+      "post": {
+        "summary": "Register New Employee/Cashier",
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["username", "password", "name"],
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" },
+                  "name": { "type": "string" },
+                  "phone": { "type": "string" },
+                  "role": { "type": "string", "enum": ["staff", "owner"] }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Employee Created"
+          }
+        }
+      }
+    },
+    "/supplier": {
+      "get": {
+        "summary": "List Registered Suppliers",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Supplier List"
+          }
+        }
+      },
+      "post": {
+        "summary": "Register New Supplier",
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "phone": { "type": "string" },
+                  "email": { "type": "string" },
+                  "address": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Supplier Registered"
+          }
+        }
+      }
+    },
+    "/purchase": {
+      "get": {
+        "summary": "List Vendor Purchases (Restock)",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Purchase List"
+          }
+        }
+      },
+      "post": {
+        "summary": "Record Purchase / Restock Order",
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["items"],
+                "properties": {
+                  "supplier_id": { "type": "integer" },
+                  "invoice_number": { "type": "string" },
+                  "notes": { "type": "string" },
+                  "items": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": ["product_id", "quantity", "cost_per_unit"],
+                      "properties": {
+                        "product_id": { "type": "integer" },
+                        "quantity": { "type": "integer" },
+                        "cost_per_unit": { "type": "number" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Purchase Recorded and Stock Incremented"
+          }
+        }
+      }
+    },
+    "/report/sales-summary": {
+      "get": {
+        "summary": "Retrieve Sales Summary Report",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Aggregated sales figures and top products"
+          }
+        }
+      }
+    },
+    "/store/profile": {
+      "get": {
+        "summary": "Retrieve Store Profile Details",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Store profile metadata and branding"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update Store Profile",
+        "security": [{ "BearerAuth": [] }],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string" },
+                  "business_type": { "type": "string" },
+                  "address": { "type": "string" },
+                  "phone": { "type": "string" },
+                  "email": { "type": "string" },
+                  "receipt_footer": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profile successfully updated"
+          }
+        }
+      }
+    },
+    "/subscription/plan": {
+      "get": {
+        "summary": "Retrieve Current SaaS Subscription Status",
+        "security": [{ "BearerAuth": [] }],
+        "responses": {
+          "200": {
+            "description": "Subscription tier details, quotas, and expiration"
+          }
+        }
+      }
+    }
+  }
+}

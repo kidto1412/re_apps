@@ -1,0 +1,69 @@
+/stock-history
+/stock-movements/history
+/stock-opname
+/stock-opname-form
+/stock-opname/
+/stock-opname/summary
+Cari nama, telepon, atau email...
+Format email tidak valid
+Gagal memproses stock opname
+Gagal memuat detail stock opname
+Gagal memuat ringkasan stock opname
+Gagal memuat riwayat stock opname
+Masukkan alamat email
+Masukkan email
+MicrophoneMuteToggle
+MicrophoneToggle
+MicrophoneVolumeDown
+MicrophoneVolumeMute
+MicrophoneVolumeUp
+Pembelian (Restock)
+Pilih minimal 1 produk untuk dilakukan stock opname
+["*/:<>?\\|]
+["\x00-\x1F\x7F]
+[$@$8 
+[()<>@,;:"\\/\[\]?={} \t\x00-\x1F\x7F]
+[/\\]
+[17`0A
+[GlobalKey#
+[GlobalMessage Error]: 
+[GlobalMessage Info]: 
+[GlobalMessage Success]: 
+[\p{Space_Separator}\p{Punctuation}]
+[^()<>@,;:"\\/[\]?={} \t\x00-\x1F\x7F]+
+[^/\\]$
+[^/]$
+[^/]/+[^/]
+[^0-9]
+[_DeprecatedRawViewKey 
+[a-zA-Z][-+.a-zA-Z\d]*://[^/]*
+_stockLabel@695461126
+dyn:get:price
+email
+emailAddress
+emails
+microphone
+package:mobile_scanner/src/enums/email_type.dart
+package:mobile_scanner/src/enums/phone_type.dart
+package:mobile_scanner/src/objects/email.dart
+package:mobile_scanner/src/objects/phone.dart
+package:rn_mobile_pos_flutter/features/history/data/datasources/stock_movement_remote_data_source.dart
+package:rn_mobile_pos_flutter/features/history/data/models/stock_movement_model.dart
+package:rn_mobile_pos_flutter/features/history/presentation/bindings/stock_history_binding.dart
+package:rn_mobile_pos_flutter/features/history/presentation/controllers/stock_history_controller.dart
+package:rn_mobile_pos_flutter/features/history/presentation/pages/stock_history_page.dart
+package:rn_mobile_pos_flutter/features/stock_opname/data/datasources/stock_opname_remote_data_source.dart
+package:rn_mobile_pos_flutter/features/stock_opname/data/models/stock_opname_model.dart
+package:rn_mobile_pos_flutter/features/stock_opname/presentation/bindings/stock_opname_binding.dart
+package:rn_mobile_pos_flutter/features/stock_opname/presentation/controllers/stock_opname_controller.dart
+package:rn_mobile_pos_flutter/features/stock_opname/presentation/pages/stock_opname_detail_page.dart
+package:rn_mobile_pos_flutter/features/stock_opname/presentation/pages/stock_opname_form_page.dart
+package:rn_mobile_pos_flutter/features/stock_opname/presentation/pages/stock_opname_page.dart
+phone
+phoneNumber
+phones
+price
+stock
+stock_
+supplier@email.com
+{...}
